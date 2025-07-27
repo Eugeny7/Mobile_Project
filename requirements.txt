@@ -1,0 +1,10 @@
+Python==3.12.1
+allure-pytest==2.14.1
+Appium-Python-Client==5.1.2
+pip==23.2.1
+pytest==8.4.1
+pytest-xdist==3.6.1
+python-dotenv==1.1.1
+requests==2.32.3
+selenium==4.30.0
+webdriver-manager==4.0.2
