@@ -2,6 +2,10 @@ import pytest
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
 
+from mobile_project.Android_CTY.page.base_page import BasePage
+from mobile_project.Android_CTY.page.helper import Helper
+from mobile_project.Android_CTY.page.reg_page import RegistrationStepOne
+
 capabilities = dict(
     platformName='Android',
     automationName='uiautomator2',
@@ -20,3 +24,16 @@ def driver():
     app = webdriver.Remote(appium_server_url, options=capabilities_options)
     yield app
     app.quit()
+
+
+@pytest.fixture()
+def base_page(driver):
+    return BasePage(driver)
+
+@pytest.fixture()
+def helpers(driver):
+    return Helper('female','ru', driver)
+
+@pytest.fixture()
+def reg_page(driver):
+    return RegistrationStepOne('female','ru', driver)

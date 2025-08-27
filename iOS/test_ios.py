@@ -1,5 +1,5 @@
 from appium.webdriver.common.appiumby import AppiumBy
-from  Otus.Appium.iOS.src import Helper
+from  mobile_project.iOS.src import Helper
 import allure
 
 @allure.title('Создание события')
