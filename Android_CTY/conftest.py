@@ -3,7 +3,7 @@ from appium import webdriver
 from appium.options.android import UiAutomator2Options
 
 from mobile_project.Android_CTY.page.base_page import BasePage
-from mobile_project.Android_CTY.page.helper import Helper
+from mobile_project.Android_CTY.src.helper import Helper
 from mobile_project.Android_CTY.page.reg_page import RegistrationStepOne
 
 capabilities = dict(

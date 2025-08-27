@@ -1,7 +1,7 @@
 from mimesis import Gender
 import allure
-from mobile_project.Android_CTY.page.locators import *
-from mobile_project.Android_CTY.page.helper import Helper
+from mobile_project.Android_CTY.locators.locators import *
+from mobile_project.Android_CTY.src.helper import Helper
 
 
 class RegistrationStepOne(Helper):

@@ -1,4 +1,4 @@
-from mobile_project.Android_CTY.page.locators import *
+from mobile_project.Android_CTY.locators.locators import *
 import allure
 from selenium.common import NoSuchElementException, TimeoutException
 from appium.webdriver.webdriver import WebDriver
@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 class BasePage:
     def __init__(self, driver: WebDriver):
         self.driver = driver
+
     @allure.step('Поиск веб елемента')
     def get_element(self, locator):
         wait = WebDriverWait(self.driver, 15, 2)
