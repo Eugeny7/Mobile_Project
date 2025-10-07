@@ -1,7 +1,7 @@
 from appium.webdriver.common.appiumby import AppiumBy
 
 
-class BasePageLocators:
+class OnboardingPageLocators:
     on_boarding_fragment_skip = (AppiumBy.ID, 'ru.cashtoyou.app:id/on_boarding_fragment_skip')
     get_money_dialog_btn = (AppiumBy.ID, 'ru.cashtoyou.app:id/get_money_dialog_progress_button_btn')
     loan_btn_nav_bar = (AppiumBy.ID, 'ru.cashtoyou.app:id/loanFragment')
