@@ -26,3 +26,28 @@ class RegPageStepOne(BasePage):
         with allure.step('Проверка заголовка текущего экрана'):
             title_window = self.get_clickable_element(RegPageLocatorsStepOne.title_window_step_two).text
             assert title_window == 'Документы и контакты', f'Переход НЕ осуществлён,текущий экран : {title_window}'
+
+    def fill_registration_step_one(self, user):
+        with allure.step('Заполнение поля "Фамилия"'):
+            self.send_a_value_to_the_field(RegPageLocatorsStepOne.surname_input, user["surname"])
+        with allure.step('Заполнение поля "Имя"'):
+            self.send_a_value_to_the_field(RegPageLocatorsStepOne.name_input, user["name"])
+        with allure.step('Заполнение поля "Отчество"'):
+            self.send_a_value_to_the_field(RegPageLocatorsStepOne.patronymic_input, user["patronymic"])
+        with allure.step('Заполнение поля "Дата рождения"'):
+            self.send_a_value_to_the_field(RegPageLocatorsStepOne.date_of_birth_input, user["birthday"])
+        with allure.step('Выбор радиобаттона "Пол"'):
+            self.choosing_gender_radiobaton()
+        with allure.step('Заполнение поля "Телефон"'):
+            self.send_a_value_to_the_field(RegPageLocatorsStepOne.phone_input, user["phone"])
+        with allure.step('Заполнение поля "E-mail"'):
+            self.send_a_value_to_the_field(RegPageLocatorsStepOne.email_input, user["email"])
+        with allure.step('Заполнение поля "Пароль"'):
+            self.send_a_value_to_the_field(RegPageLocatorsStepOne.password_input, user["password"])
+        self.swipe_vertical('up')
+        with allure.step('Заполнение поля "Подтвердите пароль"'):
+            self.send_a_value_to_the_field(RegPageLocatorsStepOne.password_confirm_input, user["password"])
+        with allure.step('Активация чек-бокса "Подписаться на рассылку"'):
+            self.activation_of_checkbox(RegPageLocatorsStepOne.sending_checkbox)
+        with allure.step('Активация чек-бокса "Согласие на обработку ПДН"'):
+            self.activation_of_checkbox(RegPageLocatorsStepOne.consent_pdn_checkbox)

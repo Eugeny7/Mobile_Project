@@ -5,6 +5,7 @@ from mobile_project.Android_CTY.page.base_page import BasePage
 from mobile_project.Android_CTY.src.helper import Helper
 from mobile_project.Android_CTY.page.reg_page import RegPageStepOne
 from mobile_project.Android_CTY.page.onboarding_page import Onboarding
+from collections import namedtuple
 
 capabilities = dict(
     platformName='Android',
@@ -26,21 +27,21 @@ def driver():
     app.quit()
 
 
-@pytest.fixture()
-def base_page(driver):
-    return BasePage('female', 'ru', driver)
+class PageFactory:
+    def __init__(self, driver, gender='male', locale='ru'):
+        self.base = BasePage(gender, locale, driver)
+        self.reg = RegPageStepOne(gender, locale, driver)
+        self.onboarding = Onboarding(gender, locale, driver)
+        self.helpers = Helper(gender, locale, driver)
 
 
 @pytest.fixture()
-def helpers(driver):
-    return Helper('female', 'ru', driver)
+def pages(driver):
+    return PageFactory(driver)
 
 
 @pytest.fixture()
-def reg_page(driver):
-    return RegPageStepOne('female', 'ru', driver)
-
-
-@pytest.fixture()
-def onboarding_page(driver):
-    return Onboarding('female', 'ru', driver)
+def user(pages):
+    pages.helpers.create_user(1980, 2000)
+    user = pages.helpers.read_file_user('user_data.json')
+    return user

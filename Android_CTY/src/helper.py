@@ -92,3 +92,15 @@ class Helper(BasePage):
         with open(file_path, "r", encoding="utf-8") as f:
             user_data = json.load(f)
         return user_data
+
+    def get_value_element(self, element: tuple[str, str]) -> str:
+        title = self.get_visible_element(element)
+        return title.text
+
+    def assert_value_for_element(self, element: tuple[str, str], expected_result):
+        actual_result = self.get_value_element(element)
+        assert actual_result == expected_result, f'Фактическое значение{actual_result} не соответствует ожидаемому{expected_result}значению'
+
+
+
+
