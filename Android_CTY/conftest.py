@@ -5,7 +5,6 @@ from mobile_project.Android_CTY.page.base_page import BasePage
 from mobile_project.Android_CTY.src.helper import Helper
 from mobile_project.Android_CTY.page.reg_page import RegPageStepOne
 from mobile_project.Android_CTY.page.onboarding_page import Onboarding
-from collections import namedtuple
 
 capabilities = dict(
     platformName='Android',

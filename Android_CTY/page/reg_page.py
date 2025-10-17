@@ -16,16 +16,10 @@ class RegPageStepOne(BasePage):
             raise ValueError(f'Выбранный пол: {self.gender} не поддерживается')
         if not element.get_attribute('checked') == 'true':
             element.click()
-        with allure.step('Проверка состояния радиобаттона'):
-            value = element.get_attribute('checked')
-            assert value == 'true', f'Состояние радиобаттона "Пол" == {value}'
 
     def go_to_reg_page_step_two(self) -> None:
         """Переход на экран регистрации, шаг №2"""
         self.get_clickable_element(RegPageLocatorsStepOne.registration_btn_next).click()
-        with allure.step('Проверка заголовка текущего экрана'):
-            title_window = self.get_clickable_element(RegPageLocatorsStepOne.title_window_step_two).text
-            assert title_window == 'Документы и контакты', f'Переход НЕ осуществлён,текущий экран : {title_window}'
 
     def fill_registration_step_one(self, user):
         with allure.step('Заполнение поля "Фамилия"'):

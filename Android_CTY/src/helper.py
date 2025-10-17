@@ -93,14 +93,24 @@ class Helper(BasePage):
             user_data = json.load(f)
         return user_data
 
-    def get_value_element(self, element: tuple[str, str]) -> str:
+    def get_element_text(self, element: tuple[str, str]) -> str:
         title = self.get_visible_element(element)
         return title.text
 
-    def assert_value_for_element(self, element: tuple[str, str], expected_result):
-        actual_result = self.get_value_element(element)
+    def is_element_selected(self, element: tuple[str, str]) -> bool:
+        item = self.get_visible_element(element)
+        value = item.get_attribute('checked')
+        if value == 'true':
+            return True
+        else:
+            return False
+
+    def assert_element_text(self, element: tuple[str, str], expected_result):
+        actual_result = self.get_element_text(element)
         assert actual_result == expected_result, f'Фактическое значение{actual_result} не соответствует ожидаемому{expected_result}значению'
 
+    def assert_element_selected(self, element: tuple[str, str]) -> None:
+        assert self.is_element_selected(element), f'Элемент {element} checkbox/radiobutton НЕ активирован'
 
-
-
+    def clear_field(self, element: tuple[str, str])-> None:
+        self.get_clickable_element(element).clear()

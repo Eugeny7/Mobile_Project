@@ -9,7 +9,7 @@ class OnboardingPageLocators:
 
 class RegPageLocatorsStepOne:
     surname_input = (
-    AppiumBy.XPATH, '(//android.widget.AutoCompleteTextView[@resource-id="ru.cashtoyou.app:id/input_value"])[1]')
+        AppiumBy.XPATH, '(//android.widget.AutoCompleteTextView[@resource-id="ru.cashtoyou.app:id/input_value"])[1]')
     name_input = (
         AppiumBy.XPATH, '(//android.widget.AutoCompleteTextView[@resource-id="ru.cashtoyou.app:id/input_value"])[2]')
     patronymic_input = (
@@ -31,4 +31,7 @@ class RegPageLocatorsStepOne:
         AppiumBy.XPATH, '(//android.widget.CheckBox[@resource-id="ru.cashtoyou.app:id/material_cb_cb"])[2]')
     title_window_step_one = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Регистрация")')
     registration_btn_next = (AppiumBy.ID, 'ru.cashtoyou.app:id/registration_button_next')
+
+
+class RegPageLocatorsStepTwo:
     title_window_step_two = (AppiumBy.XPATH, '//android.widget.TextView[@text="Документы и контакты"]')

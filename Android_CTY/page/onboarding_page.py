@@ -9,6 +9,3 @@ class Onboarding(BasePage):
         self.get_clickable_element(OnboardingPageLocators.on_boarding_fragment_skip).click()
         self.get_clickable_element(OnboardingPageLocators.loan_btn_nav_bar).click()
         self.get_clickable_element(OnboardingPageLocators.get_money_dialog_btn).click()
-        with allure.step('Проверка заголовка текущего экрана'):
-            title_window = self.get_clickable_element(RegPageLocatorsStepOne.title_window_step_one).text
-            assert title_window == 'Регистрация', f'Переход на первый шаг регистрации НЕ осуществлён,текущий экран : {title_window}'

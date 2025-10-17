@@ -20,9 +20,6 @@ class BasePage:
         field_input = self.get_clickable_element(element)
         field_input.send_keys(field_value)
         self.skip_dropdown_dadata()
-        with allure.step('Проверка установленного значения в поле'):
-            value_input = field_input.text
-            assert value_input == field_value, f'Значение в проверяемом поле: {value_input} НЕ соответствует ожидаемому {field_value}'
 
     def get_clickable_element(self, locator):
         """Поиск кликабельного веб елемента по локатору"""
@@ -74,13 +71,9 @@ class BasePage:
         item = self.get_clickable_element(element)
         if not item.get_attribute('checked') == 'true':
             item.click()
-        with allure.step('Проверка состояния чек-бокса'):
-            assert item.get_attribute('checked') == 'true', f'Чек-бокс НЕ активен'
 
     def deactivation_of_checkbox(self, element: tuple[str, str]) -> None:
         """Деактивация чекбокса по локатору"""
         item = self.get_clickable_element(element)
         if item.get_attribute('checked') == 'true':
             item.click()
-        with allure.step('Проверка состояния чек-бокса'):
-            assert item.get_attribute('checked') != 'true', f'Чек-бокс активен'
