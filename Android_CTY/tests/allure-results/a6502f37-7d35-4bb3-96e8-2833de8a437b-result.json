@@ -1,0 +1,1 @@
+{"name": "Негативная проверка заполнения поля \"Фамилия\" первого шага регистрации", "status": "skipped", "parameters": [{"name": "value", "value": "'123'"}], "start": 1761678137567, "stop": 1761678137567, "uuid": "6f1ccc23-2d4b-4df6-8e0c-c8b0d1f95d57", "testCaseId": "d808dafed24ff49506f427f4c5a260a0", "fullName": "Android_CTY.tests.test_cty#test_field_surname_reg_step_one"}

@@ -41,12 +41,13 @@ class Helper(BasePage):
     def generate_user_person(locale):
         """Генерация объекта класса Person"""
         locale_normalized = locale.strip().lower()
-        if locale_normalized == 'ru':
-            user = Person(Locale.RU)
-        elif locale_normalized == 'en':
-            user = Person(Locale.EN)
-        else:
-            raise ValueError(f'Выбранная локализация: {locale} не поддерживается')
+        match locale_normalized:
+            case 'ru':
+                user = Person(Locale.RU)
+            case 'en':
+                user = Person(Locale.EN)
+            case _:
+                raise ValueError(f'Выбранная локализация: {locale} не поддерживается')
         return user
 
     @staticmethod
@@ -54,22 +55,23 @@ class Helper(BasePage):
         """Генерация отчества для модели юзера"""
         gender_normalized = gender.strip().lower()
         fathers_name_normalized = fathers_name.strip().lower()
-        if gender_normalized == 'male':
-            if fathers_name_normalized.endswith('й'):
-                patronymic = fathers_name_normalized[:-1] + 'евич'
-            elif fathers_name_normalized.endswith('а'):
-                patronymic = fathers_name_normalized[:-1] + 'ич'
-            else:
-                patronymic = fathers_name_normalized + 'ович'
-        elif gender_normalized == 'female':
-            if fathers_name_normalized.endswith('й'):
-                patronymic = fathers_name_normalized[:-1] + 'евна'
-            elif fathers_name_normalized.endswith('а'):
-                patronymic = fathers_name_normalized[:-1] + 'ична'
-            else:
-                patronymic = fathers_name_normalized + 'овна'
-        else:
-            raise ValueError(f'Выбранный гендер: {gender} не поддерживается')
+        match gender_normalized:
+            case 'male':
+                if fathers_name_normalized.endswith('й'):
+                    patronymic = fathers_name_normalized[:-1] + 'евич'
+                elif fathers_name_normalized.endswith('а'):
+                    patronymic = fathers_name_normalized[:-1] + 'ич'
+                else:
+                    patronymic = fathers_name_normalized + 'ович'
+            case 'female':
+                if fathers_name_normalized.endswith('й'):
+                    patronymic = fathers_name_normalized[:-1] + 'евна'
+                elif fathers_name_normalized.endswith('а'):
+                    patronymic = fathers_name_normalized[:-1] + 'ична'
+                else:
+                    patronymic = fathers_name_normalized + 'овна'
+            case _:
+                raise ValueError(f'Выбранный гендер: {gender} не поддерживается')
         return patronymic.capitalize()
 
     @staticmethod
@@ -107,10 +109,13 @@ class Helper(BasePage):
 
     def assert_element_text(self, element: tuple[str, str], expected_result):
         actual_result = self.get_element_text(element)
-        assert actual_result == expected_result, f'Фактическое значение{actual_result} не соответствует ожидаемому{expected_result}значению'
+        assert actual_result == expected_result, f'Фактическое значение: {actual_result},  не соответствует ожидаемому значению: {expected_result}'
 
     def assert_element_selected(self, element: tuple[str, str]) -> None:
         assert self.is_element_selected(element), f'Элемент {element} checkbox/radiobutton НЕ активирован'
 
-    def clear_field(self, element: tuple[str, str])-> None:
+    def clear_field(self, element: tuple[str, str]) -> None:
         self.get_clickable_element(element).clear()
+
+    def hide_keyboard(self) -> None:
+        self.driver.hide_keyboard()

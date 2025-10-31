@@ -8,18 +8,18 @@ from mobile_project.Android_CTY.page.onboarding_page import Onboarding
 
 capabilities = dict(
     platformName='Android',
-    automationName='uiautomator2',
+    automationName='UiAutomator2',
     deviceName='emulator-5554',
     app='/Users/evgenijpuckov/apps/CTY-gms.apk',
     autoGrantPermissions=True,
-
+    noReset=False
 )
 
 appium_server_url = 'http://localhost:4723'
 capabilities_options = UiAutomator2Options().load_capabilities(capabilities)
 
 
-@pytest.fixture()
+@pytest.fixture(scope='function')
 def driver():
     app = webdriver.Remote(appium_server_url, options=capabilities_options)
     yield app

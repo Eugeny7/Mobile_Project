@@ -8,12 +8,13 @@ class RegPageStepOne(BasePage):
     def choosing_gender_radiobaton(self) -> None:
         """Выбор радиобаттона 'Пол', в зав-ти от атрибута gender"""
         gender_normalized = self.gender.strip().lower()
-        if gender_normalized == 'male':
-            element = self.get_clickable_element(RegPageLocatorsStepOne.gender_male_radiobutton)
-        elif gender_normalized == 'female':
-            element = self.get_clickable_element(RegPageLocatorsStepOne.gender_female_radiobutton)
-        else:
-            raise ValueError(f'Выбранный пол: {self.gender} не поддерживается')
+        match gender_normalized:
+            case 'male':
+                element = self.get_clickable_element(RegPageLocatorsStepOne.gender_male_radiobutton)
+            case 'female':
+                element = self.get_clickable_element(RegPageLocatorsStepOne.gender_female_radiobutton)
+            case _:
+                raise ValueError(f'Выбранный пол: {self.gender} не поддерживается')
         if not element.get_attribute('checked') == 'true':
             element.click()
 

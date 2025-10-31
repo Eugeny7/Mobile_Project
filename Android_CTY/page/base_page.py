@@ -1,4 +1,3 @@
-import allure
 from selenium.common import NoSuchElementException, TimeoutException
 from appium.webdriver.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -18,8 +17,9 @@ class BasePage:
     def send_a_value_to_the_field(self, element: tuple[str, str], field_value: str) -> None:
         """Заполнение поля по локатору"""
         field_input = self.get_clickable_element(element)
+        # field_input.click()
         field_input.send_keys(field_value)
-        self.skip_dropdown_dadata()
+        self.press_enter()
 
     def get_clickable_element(self, locator):
         """Поиск кликабельного веб елемента по локатору"""
@@ -44,14 +44,15 @@ class BasePage:
         direction_normalized = direction.strip().lower()
         window = self.driver.get_window_size()
         start_x = window["width"] * 0.5
-        if direction_normalized == 'up':
-            start_y = window["height"] * 0.8
-            end_y = window["height"] * 0.2
-        elif direction_normalized == 'down':
-            start_y = window["height"] * 0.2
-            end_y = window["height"] * 0.8
-        else:
-            raise ValueError(f'Направление {direction} не поддерживается')
+        match direction_normalized:
+            case 'up':
+                start_y = window["height"] * 0.8
+                end_y = window["height"] * 0.2
+            case 'down':
+                start_y = window["height"] * 0.2
+                end_y = window["height"] * 0.8
+            case _:
+                raise ValueError(f'Направление {direction} не поддерживается')
         finger = PointerInput("touch", "finger")
         actions = ActionBuilder(self.driver, mouse=finger)
         actions.pointer_action.move_to_location(start_x, start_y)
@@ -61,8 +62,8 @@ class BasePage:
         actions.pointer_action.pointer_up()
         actions.perform()
 
-    def skip_dropdown_dadata(self) -> None:
-        """Закрыть выпадающий список инпута от dadata """
+    def press_enter(self) -> None:
+        """Нажатие клавиши ENTER на экранной клавиатуре"""
         action = ActionChains(self.driver)
         action.send_keys(Keys.ENTER).perform()
 
